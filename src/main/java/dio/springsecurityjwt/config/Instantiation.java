@@ -3,6 +3,7 @@ package dio.springsecurityjwt.config;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.List;
 import java.util.TimeZone;
 
 import dio.springsecurityjwt.models.User;
@@ -22,11 +23,11 @@ public class Instantiation implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         userRepository.deleteAll();
-        User tony = new User(null, "Anthony Cruz", "Anthony", encoder.encode("Anthony01"));
-        User bia = new User(null, "Bianca Alves", "bia", encoder.encode("bia01"));
-        User maria = new User(null, "Maria Brown", "maria", encoder.encode("maria01"));
-        User alex = new User(null, "Alex Green", "alex", encoder.encode("alex01"));
-        User bob = new User(null, "Bob Grey", "bob", encoder.encode("bob01"));
+        User tony = new User(null, "Anthony Cruz", "Anthony", encoder.encode("Anthony01"), Arrays.asList("USERS", "MANAGERS"));
+        User bia = new User(null, "Bianca Alves", "bia", encoder.encode("bia01"), List.of("USERS"));
+        User maria = new User(null, "Maria Brown", "maria", encoder.encode("maria01"), Arrays.asList("USERS", "MANAGERS"));
+        User alex = new User(null, "Alex Green", "alex", encoder.encode("alex01"), List.of("USERS"));
+        User bob = new User(null, "Bob Grey", "bob", encoder.encode("bob01"), List.of("MANAGERS"));
         userRepository.saveAll(Arrays.asList(tony, bia, maria, alex, bob));
 
     }
