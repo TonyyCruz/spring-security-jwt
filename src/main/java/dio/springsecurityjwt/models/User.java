@@ -1,12 +1,11 @@
 package dio.springsecurityjwt.models;
 
-import jakarta.persistence.*;
 import lombok.*;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -25,8 +24,16 @@ public class User {
     private String username;
     @Column(length = 100, nullable = false)
     private String password;
+    @Setter(AccessLevel.NONE)
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "tb_user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role_id")
     private List<String> roles = new ArrayList<>();
+
+    public User(Integer id, String name, String username, String password) {
+        this.id = id;
+        this.name = name;
+        this.username = username;
+        this.password = password;
+    }
 }
